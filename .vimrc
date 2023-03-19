@@ -7,6 +7,7 @@ let mapleader=","
 set nu
 set autoindent
 set tabstop=4
+set shiftwidth=4
 set foldmethod=syntax
 set nofoldenable
 
