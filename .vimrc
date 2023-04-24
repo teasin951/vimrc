@@ -15,12 +15,12 @@ set nofoldenable
 nnoremap <buffer> j gj
 nnoremap <buffer> k gk
 
-" Compile inside vim using make (has to be a Makefile present in the directory)
-map <F5> :w <CR>:!make; if [ $? -eq 0 ]; then echo "---"; echo -e "\e[32;1m✔\e[39;0m"; else echo "---"; echo -en "\e[31;1m✘\e[39;0m" "\033[1D\e[31m-$?\e[39;0m\n"; fi<CR>
-" Compile inside vim for C 
-map <F6> :w <CR>:!g++ -Wall -pedantic -g -fsanitize=address % && ./a.out; if [ $? -eq 0 ]; then echo "---"; echo -e "\e[32;1m✔\e[39;0m"; else echo "---"; echo -en "\e[31;1m✘\e[39;0m" "\033[1D\e[31m-$?\e[39;0m\n"; fi <CR>
-" Compile and launch debugger
-map <S-F6> :w <CR>:!g++ -Wall -pedantic -g -fsanitize=address % && gdb ./a.out <CR>
+" Mouse support
+set mouse=a
+
+" Termdebug config
+packadd termdebug
+let g:termdebug_popup = 0
 
 " Buffer handeling
 set hidden
