@@ -30,10 +30,12 @@ call plug#begin()
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'powerline/powerline'
 
-	Plug 'dense-analysis/ale', { 'for': ['c', 'python', 'sh', 'cpp'] }
+	Plug 'dense-analysis/ale'
+	" , { 'for': ['c', 'python', 'sh', 'cpp', 'haskell'] }
 
-	Plug 'Raimondi/delimitMate', { 'for': ['c', 'python', 'sh', 'cpp'] }
+	Plug 'Raimondi/delimitMate', { 'for': ['c', 'python', 'sh', 'cpp', 'arduino', 'haskell'] }
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+	Plug 'vhda/verilog_systemverilog.vim'
 
 	Plug 'kien/ctrlp.vim'
 
@@ -67,6 +69,13 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
+
+
+let g:ale_linters = {'cpp': ['cc', 'clang', 'cppcheck']}
+let g:ale_fixers = {'cpp': ['clang-format']}
+let g:ale_linters_ignore = {'cpp': ['clangcheck', 'clangtidy']}
+let g:ale_cpp_cc_options = "-std=c++17 -Wall"
+let g:ale_cpp_clangd_options = "-std=c++17 -Wall"
 
 
 " Configure Ctrl-P
