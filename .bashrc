@@ -45,3 +45,6 @@ fi
 cdls() {
         cd "$@" && ls;
 }
+
+# For zoxide
+eval "$(zoxide init --cmd cd bash)"

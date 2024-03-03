@@ -1,5 +1,5 @@
 alias ll='ls -lh'
-alias la='ls -AF'
+alias la='ls -AFhl'
 
 alias sudo='sudo '
 alias shutdown='systemctl poweroff'
