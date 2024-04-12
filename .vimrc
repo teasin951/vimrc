@@ -1,6 +1,6 @@
 set nocompatible
-set clipboard=unnamedplus
 filetype plugin on
+syntax on
 let mapleader=","
 
 " For better style
@@ -14,6 +14,9 @@ set nofoldenable
 " Do not skip lines
 nnoremap <buffer> j gj
 nnoremap <buffer> k gk
+noremap J 10j
+noremap K 10k
+
 
 " Mouse support
 set mouse=a
@@ -26,6 +29,10 @@ let g:termdebug_popup = 0
 set hidden
 
 call plug#begin()
+	Plug 'vimwiki/vimwiki'
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf.vim'
+
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'powerline/powerline'

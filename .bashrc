@@ -41,10 +41,53 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
-# Create a new command cdls
-cdls() {
-        cd "$@" && ls;
+# --- for fzf ---
+export FZF_COMPLETION_TRIGGER='??'
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
 }
 
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+export FZF_DEFAULT_OPTS="--preview '
+if [ -d "{}" ]; then
+    tree -C -a -L 1 "{}"
+elif [ -f "{}" ]; then
+    if file --mime-type "{}" | grep -q "text/"; then
+        bat --color=always "{}"
+    else
+        stat "{}"
+    fi
+fi'
+"
+export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix"  # for files search only current directory by default
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--bind 'ctrl-d:reload(fd --type f . $HOME),ctrl-f:reload(eval $FZF_DEFAULT_COMMAND)'"  # ctrl-d changes it to global
+export FZF_ALT_C_COMMAND="fd --type d . $HOME"  # directories are searched from home and local directory
+export FZF_ALT_C_OPTS="--bind 'ctrl-d:reload(eval $FZF_ALT_C_COMMAND),ctrl-f:reload(fd --type d --strip-cwd-prefix)'"  # ctrl-f to change that 
+source /usr/share/fzf/shell/key-bindings.bash
+
+
+# --- VimWiki ---
+# vim wiki
+vw() {
+	cd ~/vimwiki || return 2
+	vim -c VimwikiIndex
+	cd - || return 2
+}
+
+# fuzzy wiki
+fw() {
+	cd ~/vimwiki || return 2
+	vim -c VimwikiIndex -c Rg
+	cd - || return 2
+}
+
+
 # For zoxide
-eval "$(zoxide init --cmd cd bash)"
+# eval "$(zoxide init --cmd cd bash)"
