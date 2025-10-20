@@ -71,23 +71,3 @@ export FZF_CTRL_T_OPTS="--bind 'ctrl-d:reload(fd --type f . $HOME),ctrl-f:reload
 export FZF_ALT_C_COMMAND="fd --type d . $HOME"  # directories are searched from home and local directory
 export FZF_ALT_C_OPTS="--bind 'ctrl-d:reload(eval $FZF_ALT_C_COMMAND),ctrl-f:reload(fd --type d --strip-cwd-prefix)'"  # ctrl-f to change that 
 source /usr/share/fzf/shell/key-bindings.bash
-
-
-# --- VimWiki ---
-# vim wiki
-vw() {
-	cd ~/vimwiki || return 2
-	vim -c VimwikiIndex
-	cd - || return 2
-}
-
-# fuzzy wiki
-fw() {
-	cd ~/vimwiki || return 2
-	vim -c VimwikiIndex -c Rg
-	cd - || return 2
-}
-
-
-# For zoxide
-# eval "$(zoxide init --cmd cd bash)"
